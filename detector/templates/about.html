@@ -1,0 +1,172 @@
+<!--{% load static %}-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            background-image: url("{% static 'images/bg_about.png' %}");
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center center;
+            color: #333;
+        }
+
+        .title-box {
+            background: linear-gradient(135deg, #2980b9, #6dd5fa);
+            color: white;
+            padding: 30px;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            position: relative;
+        }
+
+        .title-box h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3em;
+            margin: 0;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .about-content {
+            background-color: rgba(255, 255, 255, 0.9);
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            line-height: 1.8;
+            font-size: 1.1em;
+        }
+
+        .about-content h2, .about-content h3 {
+            font-family: 'Playfair Display', serif;
+            color: #2c3e50;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .about-content ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .about-content li {
+            margin-bottom: 10px;
+            position: relative;
+            padding-left: 25px;
+        }
+
+        .about-content li::before {
+            content: '•';
+            position: absolute;
+            left: 0;
+            color: #3498db;
+            font-size: 1.5em;
+        }
+
+        .return-button {
+            position: absolute;
+            top: 50%;
+            right: 20px;
+            transform: translateY(-50%);
+            display: inline-block;
+            padding: 12px 25px;
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .return-button:hover {
+            background: linear-gradient(135deg, #2980b9, #3498db);
+            transform: translateY(-53%);
+            box-shadow: 0 6px 10px rgba(0, 0, 0, 0.3);
+        }
+        
+        .justify-text {
+            text-align: justify;
+        }
+
+        .fancy-list {
+            list-style-type: none;
+            padding-left: 0; /* Remove default padding */
+            margin-left: 0; /* Remove default margin */
+        }
+
+        .fancy-list li {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 5px; /* Add a little spacing between items */
+        }
+
+        .fancy-list li::before {
+            content: "🔹"; /* Or use an image: url('path/to/image.png'); */
+            margin-right: 10px;
+            font-size: 1.5em;
+            font-family: monospace; /* Use monospaced font for bullets */
+            min-width: 20px; /* Adjust as needed */
+            display: inline-block;
+        }
+
+        .fancy-list li:nth-child(2)::before{
+            content: "🔹";
+        }
+
+        .fancy-list li span:nth-child(2) {
+            min-width: 300px; /* Set min width for text label */
+            display: inline-block;
+        }
+
+        .fancy-list li:nth-child(3)::before{
+            content: "🔹";
+        }
+
+        @media (max-width: 768px) {
+            .return-button {
+                position: relative;
+                display: block;
+                margin: 20px auto;
+                text-align: center;
+                transform: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="title-box">
+        <h1>Potato Disease Classifier</h1>
+        <a href="{% url 'upload_image' %}" class="return-button">Return to Upload</a>
+    </div>
+    <div class="about-content">
+        <h2>About Us</h2>
+        <p class="justify-text">
+            This application helps users identify potato diseases using image analysis (computer vision). It leverages a deep learning model (ResNet18) to classify potato leaves as either healthy or affected by early or late blight.
+            The backend is built using Django API, while the frontend consists of simple HTML and CSS pages.
+        </p>
+        <h3>Developer Information</h3>
+        <p>
+            This app was created by Amanuel Mihiret.
+        </p>
+        <ul>
+            <li><a href="mailto:zeaman48@gmail.com">Email</a></li>
+            <li><a>+251918724038</a></li>
+        </ul>
+        <h3>Technology Used</h3>
+        <ul class="fancy-list">
+            <li>Django (Backend)</li>
+            <li>PyTorch (Deep Learning Model)</li>
+            <li>HTML/CSS (Frontend)</li>
+        </ul>
+    </div>
+</body>
+</html>

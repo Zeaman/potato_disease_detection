@@ -1,0 +1,196 @@
+<!--{% load static %}-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prediction Result</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            background-image: url("{% static 'images/bg_result.png' %}");
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center center;
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            text-align: center;
+        }
+
+        .title-box {
+            background: linear-gradient(135deg, #e74c3c, #f39c12);
+            color: white;
+            padding: 30px;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            position: relative;
+        }
+
+        .title-box h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3em;
+            margin: 0;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        main {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        h1 {
+            font-family: 'Playfair Display', serif;
+            color: #2c3e50;
+            margin-bottom: 20px;
+            font-size: 2.5em;
+        }
+
+        .uploaded-image {
+            max-width: 500px;
+            height: auto;
+            margin: 30px auto;
+            display: block;
+            border-radius: 15px;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        h2 {
+            font-family: 'Playfair Display', serif;
+            color: #34495e;
+            margin-bottom: 15px;
+            font-size: 1.8em;
+        }
+
+        h3 {
+            color: blue;
+            margin-bottom: 0px;
+            font-family: 'Your Fancy Font', cursive;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+            margin-bottom: 30px;
+        }
+
+        li {
+            margin: 8px 0;
+            color: #666;
+            font-size: 1.1em;
+        }
+
+        a {
+            display: inline-block;
+            padding: 12px 25px;
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            margin-top: 20px;
+        }
+
+        a:hover {
+            background: linear-gradient(135deg, #2980b9, #3498db);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .return-button, .about-button {
+            position: absolute;
+            top: 30px;
+            display: inline-block;
+            padding: 12px 25px;
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .return-button {
+            right: 150px;
+        }
+
+        .about-button {
+            right: 20px;
+        }
+
+        .return-button:hover, .about-button:hover {
+            background: linear-gradient(135deg, #2980b9, #3498db);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .probability{
+        color: red;
+        margin-left: auto; /* Push probability to the right */
+        }
+        
+        .fancy-list {
+            list-style-type: none;
+            padding-left: 0; /* Remove default padding */
+            margin-left: 0; /* Remove default margin */
+        }
+
+        .fancy-list li {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 5px; /* Add a little spacing between items */
+        }
+
+        .fancy-list li::before {
+            content: "✨"; /* Or use an image: url('path/to/image.png'); */
+            margin-right: 10px;
+            font-size: 1.5em;
+            font-family: monospace; /* Use monospaced font for bullets */
+            min-width: 20px; /* Adjust as needed */
+            display: inline-block;
+        }
+
+        .fancy-list li:nth-child(2)::before{
+            content: "✨";
+        }
+
+        .fancy-list li span:nth-child(2) {
+            min-width: 100px; /* Set min width for text label */
+            display: inline-block;
+        }
+
+        .fancy-list li:nth-child(3)::before{
+            content: "✨";
+        }
+    </style>
+</head>
+<body>
+    <div class="title-box">
+        <h1>Potato Disease Classifier</h1>
+        <a href="{% url 'upload_image' %}" class="return-button">Return to Upload</a>
+        <a href="{% url 'about_us' %}" class="about-button">About Us</a>
+    </div>
+    <main>
+        <h1>Prediction Result</h1>
+        <img src="{{ image_url }}" alt="Uploaded Image" class="uploaded-image">
+        <h2>Predicted Status: {{ disease }}</h2>
+        <h3>Probabilities:</h3>
+        <ul class="fancy-list">
+            <li>Healthy: <span class="probability"> {{ probabilities.1|floatformat:2 }}%</span></li>
+            <li>Early Blight: <span class="probability"> {{ probabilities.0|floatformat:2 }}%</span></li>
+            <li>Late Blight: <span class="probability"> {{ probabilities.2|floatformat:2 }}%</span></li>
+        </ul>
+        <a href="{% url 'upload_image' %}">Upload Another Image</a>
+    </main>
+</body>
+</html>

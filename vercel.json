@@ -1,0 +1,13 @@
+{
+    "builds": [{
+        "src": "potato_disease_detection/wsgi.py",
+        "use": "@vercel/python",
+        "config": { "maxLambdaSize": "15mb", "runtime": "python3.11" }
+    }],
+    "routes": [
+        {
+            "src": "/(.*)",
+            "dest": "potato_disease_detection/wsgi.py"
+        }
+    ]
+}
